@@ -1,0 +1,4 @@
+spring:
+  name: rental-sys
+  profiles:
+    active: local

@@ -1,0 +1,53 @@
+spring:
+  name: rental-sys-local
+  datasource:
+    platform: mysql
+    type: com.zaxxer.hikari.HikariDataSource
+    url: jdbc:mysql://localhost:3306/rental_sys
+    username: root
+    password: neha07
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    hikari: 
+      minimumIdle: 5
+      maximumPoolSize: 10
+      idleTimeout: 30000
+      poolName: rental-sys-pool-local	
+      maxLifetime: 2000000
+      connecetionTimeout: 30000
+  jpa:
+    hibernate:
+      ddl-auto: update
+    generate-ddl: false
+    show-sql: false
+    properties:
+      hibernate:
+        show_sql: false
+        format_sql: false
+        dialect: org.hibernate.dialect.MySQL8Dialect 
+
+  servlet:
+    multipart:
+    max-file-size: 200MB
+    max-request-size: 250MB
+
+server:
+  servlet:
+    context-path: /rental-sys-local
+  port: 2024
+  
+  logging:
+    file:
+      name: logs/rental-sys-pool-service.log  
+    pattern:
+      console: "%d %-5level [%thread] %logger : %msg%n"
+      file: "%d %-5level [%thread] %logger : %msg%n"
+    level:
+      org.springframework.web: INFO
+      org.springframework.web.servlet.resource: DEBUG
+      org.hibernate: INFO
+      com.amstech.dairy.management.system: INFO
+      org.springframework.security: DEBUG
+      com.virtustrike.gaming.pvt.software: DEBUG
+
+app:
+  max-file-size: 524288000
