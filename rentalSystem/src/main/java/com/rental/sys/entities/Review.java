@@ -4,7 +4,7 @@ import jakarta.persistence.*;
 import java.sql.Timestamp;
 
 @Entity
-@Table(name="reviews")
+@Table(name="reviews", uniqueConstraints = @UniqueConstraint(columnNames = {"user_id", "product_id"}))
 @NamedQuery(name="Review.findAll", query="SELECT r FROM Review r")
 public class Review  {
 	@Id
@@ -17,12 +17,13 @@ public class Review  {
 	private Timestamp createdAt;
 
 	private int rating;
+	
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "user_id", nullable = false)
+	private User user;
 
-	@Column(name="user_id")
-	private int userId;
-
-	//bi-directional many-to-one association to Product
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "product_id", nullable = false)
 	private Product product;
 
 	public Review() {
@@ -60,12 +61,12 @@ public class Review  {
 		this.rating = rating;
 	}
 
-	public int getUserId() {
-		return this.userId;
+	public User getUser() {
+		return user;
 	}
 
-	public void setUserId(int userId) {
-		this.userId = userId;
+	public void setUser(User user) {
+		this.user = user;
 	}
 
 	public Product getProduct() {

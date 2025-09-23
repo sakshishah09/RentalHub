@@ -1,7 +1,5 @@
 package com.rental.sys.model.response;
 
-import java.time.LocalDateTime;
-import com.rental.sys.entities.Location;
 import lombok.Data;
 
 @Data

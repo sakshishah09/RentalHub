@@ -41,8 +41,8 @@ public class Product {
     private List<ProductImage> images = new ArrayList<>();
  
     @ManyToOne
-    @JoinColumn(name = "owner_id")
-    private User owner;
+    @JoinColumn(name = "user_id")
+    private User user;
 
     @ManyToOne
     private Category category;
@@ -147,12 +147,14 @@ public class Product {
 		this.images = images;
 	}
 
-	public User getOwner() {
-		return owner;
+	
+
+	public User getUser() {
+		return user;
 	}
 
-	public void setOwner(User owner) {
-		this.owner = owner;
+	public void setUser(User user) {
+		this.user = user;
 	}
 
 	public Category getCategory() {

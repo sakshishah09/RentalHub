@@ -2,80 +2,35 @@ package com.rental.sys.service;
 
 import java.io.File;
 import java.io.IOException;
-import java.text.MessageFormat;
 import java.util.UUID;
-
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
-import jakarta.annotation.PostConstruct;
-import lombok.extern.slf4j.Slf4j;
-
-@Slf4j
 @Service
 public class FileService {
 
-    private static final String BASE_REPO_DIRECTORY_PATH = "./storage";
-    private static final String FILE_PATH_FORMAT = "{0}/{1}/{2}.{3}";
+    private static final String STORAGE_PATH = "./storage/productImages/";
 
-    @Value("${app.max-file-size:5242880}") // default 5MB
-    private long fileMaxSize;
+    public String saveFile(MultipartFile file, String folder) throws IOException {
+        // Build path
+        String folderPath = STORAGE_PATH + folder;
+        File directory = new File(folderPath);
 
-    @PostConstruct
-    public void init() {
-        File file = new File(BASE_REPO_DIRECTORY_PATH);
-        if (!file.exists()) {
-            if (file.mkdirs()) {
-                log.info("Base storage directory created successfully");
-            } else {
-                log.warn("Failed to create base storage directory");
-            }
-        } else {
-            log.info("Base storage directory already exists");
-        }
-        log.info("Max file size allowed: {} bytes", fileMaxSize);
-    }
-
-    /**
-     * Save a MultipartFile into given sub-directory with unique filename.
-     *
-     * @param file          uploaded MultipartFile
-     * @param directoryName sub-directory (e.g., "profilePics", "productImages")
-     * @return relative file path
-     */
-    public String saveFile(MultipartFile file, String directoryName) throws IOException {
-        if (file.isEmpty()) {
-            throw new IOException("Cannot save empty file");
+        // ✅ Create folder if it doesn’t exist
+        if (!directory.exists()) {
+            directory.mkdirs();  // creates parent + subdirectories
         }
 
-        if (file.getSize() > fileMaxSize) {
-            throw new IOException("File exceeds max size of " + fileMaxSize + " bytes");
-        }
+        // Generate unique file name
+        String uniqueFileName = UUID.randomUUID() + "-" + file.getOriginalFilename();
 
-        // Extract extension
-        String originalName = file.getOriginalFilename();
-        String extension = (originalName != null && originalName.contains("."))
-                ? originalName.substring(originalName.lastIndexOf(".") + 1)
-                : "dat";
+        // Final file path
+        File destination = new File(directory, uniqueFileName);
 
-        // Create sub-directory
-        File dir = new File(BASE_REPO_DIRECTORY_PATH, directoryName);
-        if (!dir.exists() && !dir.mkdirs()) {
-            throw new IOException("Could not create directory: " + dir.getAbsolutePath());
-        }
+        // Save the file
+        file.transferTo(destination);
 
-        // Build unique file path
-        String filePath = MessageFormat.format(FILE_PATH_FORMAT,
-                BASE_REPO_DIRECTORY_PATH,
-                directoryName,
-                UUID.randomUUID().toString(),
-                extension);
-
-        // Save
-        file.transferTo(new File(filePath));
-
-        log.info("File saved at: {}", filePath);
-        return filePath;
+        // Return relative path or absolute path
+        return destination.getAbsolutePath();
     }
 }

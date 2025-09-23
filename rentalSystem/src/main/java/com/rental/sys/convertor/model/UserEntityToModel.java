@@ -1,23 +1,35 @@
 package com.rental.sys.convertor.model;
 
 import java.io.File;
-import java.sql.Timestamp;
-import java.util.Date;
+import java.util.ArrayList;
+import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.rental.sys.entities.User;
 import com.rental.sys.model.response.UserResponse;
-import com.rental.sys.repo.UserRepo;
 @Component
 public class UserEntityToModel {
-	
-	@Autowired
-	private UserRepo userRepo;
-	
 	private String extractFileNameOnly(String fullPath) {
 	    return new File(fullPath).getName();
+	}
+	public List<UserResponse> getFindAllConvert(List<User> userlist) {
+	    List<UserResponse> responses = new ArrayList<>();
+	    for (User user : userlist) {
+	        UserResponse responseModel = new UserResponse();
+	        responseModel.setId(user.getId());
+	        responseModel.setName(user.getName());
+	        responseModel.setEmail(user.getEmail());
+	        responseModel.setPhoneNumber(user.getPhoneNumber());
+	        responseModel.setAddress(user.getAddress());
+	        if (user.getImageUrl() != null) {
+	            responseModel.setImageUrl("/users/" + extractFileNameOnly(user.getImageUrl()));
+	        } else {
+	            responseModel.setImageUrl(null);
+	        }
+	        responses.add(responseModel);
+	    }
+	    return responses;
 	}
 	public UserResponse getfindbyId(User user) {
 		UserResponse responseModel = new UserResponse();
@@ -26,8 +38,12 @@ public class UserEntityToModel {
 		responseModel.setEmail(user.getEmail());
 		responseModel.setPhoneNumber(user.getPhoneNumber());
 		responseModel.setAddress(user.getAddress());
+		if(user.getImageUrl()!=null) {
 		responseModel.setImageUrl("/users/" + extractFileNameOnly(user.getImageUrl()));
-		user.setCreatedAt(new Timestamp(new Date().getTime()));
+		}else {
+			responseModel.setImageUrl(null);
+		}
+		user.setCreatedAt(user.getCreatedAt());
 		return responseModel;
 	}
 }

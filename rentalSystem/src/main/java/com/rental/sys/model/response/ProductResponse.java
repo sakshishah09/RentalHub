@@ -1,11 +1,12 @@
-package com.rental.sys.model.request;
+package com.rental.sys.model.response;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 import lombok.Data;
-
 @Data
-public class ProductSaveRequestModel {
+public class ProductResponse {
+	private int id ;
 	private String name;
 	private String description;
 	private String size;
@@ -16,4 +17,6 @@ public class ProductSaveRequestModel {
 	private int categoryId;
 	private int subcategoryId;
 	private int userId;
+	private List<ProductImageResponse> images;
+
 }

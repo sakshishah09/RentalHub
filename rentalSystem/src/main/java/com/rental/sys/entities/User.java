@@ -2,11 +2,8 @@ package com.rental.sys.entities;
 
 import jakarta.persistence.*;
 import java.sql.Timestamp;
-
-import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
-import java.sql.Timestamp;
 
 @Entity
 @Table(name = "users")
