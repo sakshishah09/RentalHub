@@ -5,11 +5,9 @@ import lombok.Data;
 
 @Data
 public class BookingSaveRequestModel {
-	
 	private Integer userId;
 	private Integer productId;
-	private LocalDate fromDate;  // optional
-	private LocalDate toDate;    // optional
-    private String status;
-	// Getters & Setters
+	private LocalDate fromDate;
+	private LocalDate toDate;
+	private String status;
 }

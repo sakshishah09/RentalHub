@@ -6,16 +6,18 @@ import jakarta.persistence.*;
 @Table(name = "location")
 public class Location {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;   
-    private String name;
-    private String pincode;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private int id;
+	private String name;
+	private String pincode;
 
-    @ManyToOne
-    @JoinColumn(name = "city_id", nullable = false)
-    private City city; 
-    public Location() {}
+	@ManyToOne
+	@JoinColumn(name = "city_id", nullable = false)
+	private City city;
+
+	public Location() {
+	}
 
 	public int getId() {
 		return id;
@@ -47,5 +49,5 @@ public class Location {
 
 	public void setCity(City city) {
 		this.city = city;
-	}  
+	}
 }
