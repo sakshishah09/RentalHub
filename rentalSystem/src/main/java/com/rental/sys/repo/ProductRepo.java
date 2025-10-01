@@ -8,9 +8,10 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import com.rental.sys.entities.Product;
+
 @Repository
-public interface ProductRepo extends JpaRepository<Product, Integer>{
-	
-	 @Query("SELECT p FROM Product p")
-	 List<Product> findAllProduct(Pageable pageable);
+public interface ProductRepo extends JpaRepository<Product, Integer> {
+
+	@Query("SELECT p FROM Product p")
+	List<Product> findAllProduct(Pageable pageable);
 }

@@ -14,16 +14,24 @@ public class Category {
 
     @Column(nullable = false, length = 100)
     private String name;
+  
+    private String imagePath; 
 
-    //(One-to-Many)
+    public String getImagePath() {
+		return imagePath;
+	}
+
+	public void setImagePath(String imagePath) {
+		this.imagePath = imagePath;
+	}
+
+	//(One-to-Many)
     @OneToMany(mappedBy = "category", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     private List<Product> products;
 
     //(One-to-Many)
     @OneToMany(mappedBy = "category", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     private List<Subcategory> subcategories;
-
-    
     
     public Category() {}
 
