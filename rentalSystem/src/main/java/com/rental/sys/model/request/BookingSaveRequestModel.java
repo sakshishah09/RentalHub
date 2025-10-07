@@ -8,12 +8,9 @@ import lombok.Data;
 @Data
 public class BookingSaveRequestModel {
 	
-	private Integer userId;
-	private Integer productId;
+	private int userId;
+	private int productId;
 	private LocalDate fromDate;
 	private LocalDate toDate;
-	private String status;
-	  private BigDecimal totalAmount;
-	
 	
 }
