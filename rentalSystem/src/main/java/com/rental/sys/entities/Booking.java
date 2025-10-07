@@ -31,6 +31,11 @@ public class Booking {
     @Column(name = "total_amount")
     private BigDecimal totalAmount;
 
+    @Column(name = "hold_expires_at")
+    
+    private LocalDateTime holdExpiresAt;
+
+    
     @ManyToOne
     @JoinColumn(name = "user_id", nullable = false)
     private User user;

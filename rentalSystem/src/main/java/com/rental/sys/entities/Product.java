@@ -1,6 +1,8 @@
 package com.rental.sys.entities;
 
 import jakarta.persistence.*;
+import lombok.Data;
+
 import java.math.BigDecimal;
 import java.sql.Timestamp;
 import java.util.ArrayList;
@@ -10,6 +12,7 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 @Entity
+@Data
 @Table(name="products")
 @NamedQuery(name="Product.findAll", query="SELECT p FROM Product p")
 public class Product {
@@ -28,6 +31,9 @@ public class Product {
     private BigDecimal priceForSale; 
 
     private boolean available; 
+    
+    @Column(name = "is_sold")
+    private Boolean isSold = false;
 
     @CreationTimestamp
     @Column(name="created_at", updatable=false)
