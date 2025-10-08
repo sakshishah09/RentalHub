@@ -4,7 +4,6 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import com.rental.sys.entities.Subcategory;
 import com.rental.sys.model.request.SubCategorySaveRequestModel;
 import com.rental.sys.model.request.SubCategoryUpdateRequestModel;
 import com.rental.sys.model.response.SubCategoryResponse;
