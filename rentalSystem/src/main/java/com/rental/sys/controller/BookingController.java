@@ -129,25 +129,6 @@ public class BookingController {
 //            return RestResponse.build().withError(e.getMessage());
 //        }
 
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-
-	   
-
-	
 //	    @Operation(summary = "Create a new booking", description = "Creates a new booking and sets status to PENDING until payment is done.")
 //	    @PostMapping("/booking")
 //	    public RestResponse createBooking(@RequestBody BookingSaveRequestModel bookingSaveRequestModel) {

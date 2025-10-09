@@ -6,6 +6,6 @@ import lombok.Data;
 public class SubCategorySaveRequestModel {
 	// Save Request
 	private String name;
-	private int categoryId;
+	private Integer categoryId;
 
 }

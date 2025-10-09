@@ -14,7 +14,7 @@ import org.hibernate.annotations.CreationTimestamp;
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Integer id;
 
     @CreationTimestamp
     @Column(name="created_at", updatable = false)

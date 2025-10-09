@@ -10,7 +10,7 @@ public class UserSignupRequestModel {
 	private String password;
 	private String status;
 	private String address;
-	private int locationId;
-	private int roleId;
+	private Integer locationId;
+	private Integer roleId;
 	
 }

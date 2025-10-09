@@ -18,5 +18,4 @@ public class ProductResponse {
 	private int subcategoryId;
 	private int userId;
 	private List<ProductImageResponse> images;
-
 }

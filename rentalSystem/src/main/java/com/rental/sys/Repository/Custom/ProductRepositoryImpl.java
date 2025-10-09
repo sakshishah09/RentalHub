@@ -170,7 +170,6 @@ public class ProductRepositoryImpl implements ProductCustomRepository {
             if (keyword != null && !keyword.trim().isEmpty()) {
                 query.setParameter("keyword", "%" + keyword.trim() + "%");
             }
-
             // Price params: Set only if non-null
             if (minPrice != null) {
                 query.setParameter("minPrice", minPrice);
@@ -184,7 +183,6 @@ public class ProductRepositoryImpl implements ProductCustomRepository {
             if (maxSalePrice != null) {
                 query.setParameter("maxSalePrice", maxSalePrice);
             }
-
             // Pagination: Only for filterBy
             if (page != null && size != null && page >= 0 && size > 0) {
                 query.setFirstResult(page * size);

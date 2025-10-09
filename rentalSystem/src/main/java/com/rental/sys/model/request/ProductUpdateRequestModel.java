@@ -9,7 +9,7 @@ import org.springframework.web.multipart.MultipartFile;
 import lombok.Data;
 @Data
 public class ProductUpdateRequestModel {
-	    private int id;
+	    private Integer id;
 	    private String name;
 	    private String description;
 	    private String color;
@@ -23,9 +23,9 @@ public class ProductUpdateRequestModel {
 	    // New images to add
 	    private List<MultipartFile> newImages;
 
-	    private int categoryId;
-	    private int subcategoryId;
-	    private int userId;
+	    private Integer categoryId;
+	    private Integer subcategoryId;
+	    private Integer userId;
 
 	    // getters and setters
 

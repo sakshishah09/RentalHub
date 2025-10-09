@@ -1,22 +1,25 @@
 package com.rental.sys.entities;
 
 import jakarta.persistence.*;
+import lombok.Data;
+
 import java.sql.Timestamp;
 
+@Data
 @Entity
 @Table(name="reviews", uniqueConstraints = @UniqueConstraint(columnNames = {"user_id", "product_id"}))
 @NamedQuery(name="Review.findAll", query="SELECT r FROM Review r")
 public class Review  {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private int id;
+	private Integer id;
 
 	private String comment;
 
 	@Column(name="created_at")
 	private Timestamp createdAt;
 
-	private int rating;
+	private Integer rating;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "user_id", nullable = false)
@@ -25,56 +28,4 @@ public class Review  {
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "product_id", nullable = false)
 	private Product product;
-
-	public Review() {
-	}
-
-	public int getId() {
-		return this.id;
-	}
-
-	public void setId(int id) {
-		this.id = id;
-	}
-
-	public String getComment() {
-		return this.comment;
-	}
-
-	public void setComment(String comment) {
-		this.comment = comment;
-	}
-
-	public Timestamp getCreatedAt() {
-		return this.createdAt;
-	}
-
-	public void setCreatedAt(Timestamp createdAt) {
-		this.createdAt = createdAt;
-	}
-
-	public int getRating() {
-		return this.rating;
-	}
-
-	public void setRating(int rating) {
-		this.rating = rating;
-	}
-
-	public User getUser() {
-		return user;
-	}
-
-	public void setUser(User user) {
-		this.user = user;
-	}
-
-	public Product getProduct() {
-		return this.product;
-	}
-
-	public void setProduct(Product product) {
-		this.product = product;
-	}
-
 }

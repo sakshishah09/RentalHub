@@ -28,6 +28,7 @@ import com.rental.sys.service.ProductService;
 import io.swagger.v3.oas.annotations.Operation;
 
 @RestController
+@RequestMapping("/products")
 public class ProductController {
 	@Autowired
 	private ProductService productService;
@@ -37,7 +38,7 @@ public class ProductController {
 	private final Logger LOGGER = LoggerFactory.getLogger(ProductController.class);
 
 	@Operation(summary = "Create a new product", description = "Creates a new product with image upload.")
-	@PostMapping(consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+	@PostMapping(value="/create",consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
 	public RestResponse createProduct(@RequestPart("product") String productJson,
 			@RequestPart("images") List<MultipartFile> images) {
 		try {

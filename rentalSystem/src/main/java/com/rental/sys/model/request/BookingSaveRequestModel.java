@@ -8,8 +8,8 @@ import lombok.Data;
 @Data
 public class BookingSaveRequestModel {
 	
-	private int userId;
-	private int productId;
+	private Integer userId;
+	private Integer productId;
 	private LocalDate fromDate;
 	private LocalDate toDate;
 	

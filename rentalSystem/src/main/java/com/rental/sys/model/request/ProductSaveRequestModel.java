@@ -13,7 +13,7 @@ public class ProductSaveRequestModel {
 	private BigDecimal pricePerDay;
 	private BigDecimal priceForSale;
 	private boolean available;
-	private int categoryId;
-	private int subcategoryId;
-	private int userId;
+	private Integer categoryId;
+	private Integer subcategoryId;
+	private Integer userId;
 }

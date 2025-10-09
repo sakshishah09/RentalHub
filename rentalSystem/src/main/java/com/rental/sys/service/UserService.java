@@ -50,11 +50,8 @@ public class UserService {
             Files.write(filePath, image.getBytes());
             imageUrl = filePath.toString();
         }
-        // Convert model to entity
         User userEntity = userModelToEntity.getSaveConvert(userSignupRequestModel, imageUrl);
-        // Save user
         User savedUser = userRepo.save(userEntity);
-        // Convert entity to response
         return userEntityToModel.getfindbyId(savedUser);
     }
     public UserResponse login(UserLoginRequestModel userLoginRequestModel) throws Exception {

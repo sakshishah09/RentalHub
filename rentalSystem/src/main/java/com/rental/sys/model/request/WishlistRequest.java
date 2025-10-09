@@ -3,6 +3,6 @@ package com.rental.sys.model.request;
 import lombok.Data;
 @Data
 public class WishlistRequest {	
-	 private int userId;
-	 private int productId;
+	 private Integer userId;
+	 private Integer productId;
 }

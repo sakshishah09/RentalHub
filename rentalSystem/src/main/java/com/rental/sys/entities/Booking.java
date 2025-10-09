@@ -15,7 +15,7 @@ public class Booking {
 	
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Integer id;
     
     @Column(name = "is_payment_done")
     private Boolean isPaymentDone = false;
