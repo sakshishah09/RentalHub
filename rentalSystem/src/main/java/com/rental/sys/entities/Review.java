@@ -2,7 +2,6 @@ package com.rental.sys.entities;
 
 import jakarta.persistence.*;
 import lombok.Data;
-
 import java.sql.Timestamp;
 
 @Data
@@ -10,86 +9,23 @@ import java.sql.Timestamp;
 @Table(name = "reviews", uniqueConstraints = @UniqueConstraint(columnNames = { "user_id", "product_id" }))
 @NamedQuery(name = "Review.findAll", query = "SELECT r FROM Review r")
 public class Review {
-	@Id
-<<<<<<< HEAD
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private Integer id;
-=======
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int id;
->>>>>>> 20370f6 (Local changes: removed deleted files and added new files)
 
-	private String comment;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
 
-	@Column(name = "created_at")
-	private Timestamp createdAt;
+    private String comment;
 
-<<<<<<< HEAD
-	private Integer rating;
-	
-=======
-	private int rating;
+    @Column(name = "created_at")
+    private Timestamp createdAt;
 
->>>>>>> 20370f6 (Local changes: removed deleted files and added new files)
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "user_id", nullable = false)
-	private User user;
+    private Integer rating;
 
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "product_id", nullable = false)
-	private Product product;
-<<<<<<< HEAD
-=======
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id", nullable = false)
+    private User user;
 
-	public Review() {
-	}
-
-	public int getId() {
-		return this.id;
-	}
-
-	public void setId(int id) {
-		this.id = id;
-	}
-
-	public String getComment() {
-		return this.comment;
-	}
-
-	public void setComment(String comment) {
-		this.comment = comment;
-	}
-
-	public Timestamp getCreatedAt() {
-		return this.createdAt;
-	}
-
-	public void setCreatedAt(Timestamp createdAt) {
-		this.createdAt = createdAt;
-	}
-
-	public int getRating() {
-		return this.rating;
-	}
-
-	public void setRating(int rating) {
-		this.rating = rating;
-	}
-
-	public User getUser() {
-		return user;
-	}
-
-	public void setUser(User user) {
-		this.user = user;
-	}
-
-	public Product getProduct() {
-		return this.product;
-	}
-
-	public void setProduct(Product product) {
-		this.product = product;
-	}
->>>>>>> 20370f6 (Local changes: removed deleted files and added new files)
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "product_id", nullable = false)
+    private Product product;
 }

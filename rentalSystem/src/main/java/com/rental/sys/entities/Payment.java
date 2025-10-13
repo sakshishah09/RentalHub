@@ -10,13 +10,8 @@ import lombok.Data;
 public class Payment {
 
 	@Id
-<<<<<<< HEAD
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private Integer id;
-=======
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int id;
->>>>>>> 20370f6 (Local changes: removed deleted files and added new files)
+	private Integer id;
 
 	@Column(name = "payment_method")
 	private String paymentMethod;
@@ -25,44 +20,10 @@ public class Payment {
 	private String paymentStatus;
 
 	// bi-directional many-to-one association to Booking
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "booking_id")
 	private Booking booking;
 
-<<<<<<< HEAD
-=======
 	public Payment() {
 	}
-
-	public int getId() {
-		return this.id;
-	}
-
-	public void setId(int id) {
-		this.id = id;
-	}
-
-	public String getPaymentMethod() {
-		return this.paymentMethod;
-	}
-
-	public void setPaymentMethod(String paymentMethod) {
-		this.paymentMethod = paymentMethod;
-	}
-
-	public String getPaymentStatus() {
-		return this.paymentStatus;
-	}
-
-	public void setPaymentStatus(String paymentStatus) {
-		this.paymentStatus = paymentStatus;
-	}
-
-	public Booking getBooking() {
-		return this.booking;
-	}
-
-	public void setBooking(Booking booking) {
-		this.booking = booking;
-	}
->>>>>>> 20370f6 (Local changes: removed deleted files and added new files)
 }

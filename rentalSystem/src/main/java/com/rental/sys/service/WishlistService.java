@@ -17,11 +17,14 @@ import com.rental.sys.repo.UserRepo;
 import com.rental.sys.repo.WishlistRepo;
 @Service
 public class WishlistService {
+	
 	@Autowired
     private WishlistRepo wishlistRepo;
-    @Autowired
+    
+	@Autowired
     private ProductRepo productRepo;
-    @Autowired
+    
+	@Autowired
     private UserRepo userRepo ;
 
     public WishlistResponse addToWishlist(WishlistRequest request) {

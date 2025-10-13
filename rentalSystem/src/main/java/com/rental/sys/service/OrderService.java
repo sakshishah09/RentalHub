@@ -20,12 +20,13 @@ import java.util.List;
 
 @Service
 public class OrderService {
+
 	@Autowired
 	private ProductRepo productRepository;
 
 	@Autowired
 	private UserRepo userRepository;
-	
+
 	@Autowired
 	private OrderRepository orderRepo;
 
@@ -56,7 +57,7 @@ public class OrderService {
 		return orderEntityToModel.convert(order);
 	}
 
-	// 🔴 Cancel order
+	// Cancel order
 	public OrderResponse cancelOrder(Integer orderId, Integer sellerId) throws Exception {
 		Order order = orderRepo.findById(orderId).orElseThrow(() -> new Exception("Order not found"));
 

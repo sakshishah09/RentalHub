@@ -4,16 +4,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.rental.sys.entities.Booking;
-import com.rental.sys.entities.Order;
+
 import com.rental.sys.model.request.BookingSaveRequestModel;
-import com.rental.sys.model.request.BookingStatusUpdateRequest;
-import com.rental.sys.model.request.OrderSaveRequestModel;
+
 import com.rental.sys.model.response.BookingResponse;
 import com.rental.sys.response.RestResponse;
 import com.rental.sys.service.BookingService;
@@ -22,10 +19,11 @@ import io.swagger.v3.oas.annotations.Operation;
 
 @RestController
 public class BookingController {
+	
 	@Autowired
 	private BookingService bookingService;
 	
-	// 1️⃣ Create a new booking
+	// Create a new booking
     @Operation(summary = "Create a new booking", description = "Creates a new booking and sets status to PENDING until payment is done.")
     @PostMapping
     public RestResponse createBooking(@RequestBody BookingSaveRequestModel bookingSaveRequestModel) {
@@ -38,7 +36,7 @@ public class BookingController {
         }
     }
 
-    // 2️⃣ Request cancellation by user
+    // Request cancellation by user
     @Operation(summary = "Request booking cancellation", description = "User requests to cancel a booking.")
     @PostMapping("/{bookingId}/request-cancel/{userId}")
     public RestResponse requestCancel(@PathVariable Integer bookingId, @PathVariable Integer userId) {
@@ -51,7 +49,7 @@ public class BookingController {
         }
     }
 
-    // 3️⃣ Handle cancellation by seller
+    // Handle cancellation by seller
     @Operation(summary = "Handle booking cancellation", description = "Seller approves or rejects a cancel request.")
     @PostMapping("/{bookingId}/handle-cancel/{sellerId}")
     public RestResponse handleCancel(@PathVariable Integer bookingId,
@@ -67,7 +65,7 @@ public class BookingController {
         }
     }
 
-    // 4️⃣ Return product
+    // Return product
     @Operation(summary = "Return booking product", description = "Mark a booking as returned or NOT_RETURNED if late.")
     @PostMapping("/{bookingId}/return")
     public RestResponse returnBooking(@PathVariable Integer bookingId) {
@@ -283,4 +281,3 @@ public class BookingController {
 //	        } catch (Exception e) {
 //	            e.printStackTrace();
 //	            return RestResponse.build().withError(e.getMessage());
-//	      	

@@ -7,10 +7,7 @@ import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 @Data
-<<<<<<< HEAD
 @Entity
-=======
->>>>>>> 20370f6 (Local changes: removed deleted files and added new files)
 @Table(name = "orders")
 public class Order {
 
@@ -18,46 +15,28 @@ public class Order {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 
-<<<<<<< HEAD
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "product_id", nullable = false)
-    private Product product;
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "buyer_id", nullable = false)
-    private User buyer;
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "seller_id", nullable = false)
-    private User seller;
-
-    @Column(nullable = false)
-    private Integer quantity;
-
-    @Column(name = "total_price", nullable = false, precision = 10, scale = 2)
-    private BigDecimal totalPrice;
-
-    @Enumerated(EnumType.STRING)
-    @Column(length = 20, nullable = false)
-    private OrderStatus status = OrderStatus.PLACED;
-
-    @Column(name = "created_at", updatable = false)
-    private LocalDateTime createdAt = LocalDateTime.now();
-
-    // getters & setters
-}
-=======
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "product_id", nullable = false)
 	private Product product;
 
-	@ManyToOne
-	@JoinColumn(name = "user_id", nullable = false)
-	private User user;
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "buyer_id", nullable = false)
+	private User buyer;
 
-	private BigDecimal amount;
-	private String status; // CREATED, PAID, CANCELLED
-	private LocalDateTime createdAt;
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "seller_id", nullable = false)
+	private User seller;
 
+	@Column(nullable = false)
+	private Integer quantity;
+
+	@Column(name = "total_price", nullable = false, precision = 10, scale = 2)
+	private BigDecimal totalPrice;
+
+	@Enumerated(EnumType.STRING)
+	@Column(length = 20, nullable = false)
+	private OrderStatus status = OrderStatus.PLACED;
+
+	@Column(name = "created_at", updatable = false)
+	private LocalDateTime createdAt = LocalDateTime.now();
 }
->>>>>>> 20370f6 (Local changes: removed deleted files and added new files)

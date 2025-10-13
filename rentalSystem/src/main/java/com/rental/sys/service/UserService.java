@@ -1,4 +1,5 @@
 package com.rental.sys.service;
+
 import java.io.File;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -20,41 +21,46 @@ import com.rental.sys.repo.UserRepo;
 
 @Service
 public class UserService {
-    @Autowired
-    private UserRepo userRepo;
-    @Autowired
-    private UserModelToEntity userModelToEntity;
-    @Autowired
-    private UserEntityToModel userEntityToModel;
-    
-    private final String PROFILE_PIC_DIR = "storage/profilePics/";
-    
-    public UserResponse signup(UserSignupRequestModel userSignupRequestModel, MultipartFile image) throws Exception {
-        // Duplicate email check
-        User byEmail = userRepo.findByEmail(userSignupRequestModel.getEmail());
-        if (byEmail != null) {
-            throw new Exception("An account with this email already exists. Please use another email.");
-        }
-        // Duplicate phone check
-        User byPhoneNumber = userRepo.findByPhoneNumber(userSignupRequestModel.getPhoneNumber());
-        if (byPhoneNumber != null) {
-            throw new Exception("An account with this phone number already exists. Please use another number.");
-        }
-        // Save image if provided
-        String imageUrl = null;
-        if (image != null && !image.isEmpty()) {
-            File dir = new File(PROFILE_PIC_DIR);
-            if (!dir.exists()) dir.mkdirs();
-            String fileName = java.util.UUID.randomUUID() + "_" + image.getOriginalFilename();
-            Path filePath = Paths.get(PROFILE_PIC_DIR + fileName);
-            Files.write(filePath, image.getBytes());
-            imageUrl = filePath.toString();
-        }
-        User userEntity = userModelToEntity.getSaveConvert(userSignupRequestModel, imageUrl);
-        User savedUser = userRepo.save(userEntity);
-        return userEntityToModel.getfindbyId(savedUser);
-    }
-    public UserResponse login(UserLoginRequestModel userLoginRequestModel) throws Exception {
+
+	@Autowired
+	private UserRepo userRepo;
+
+	@Autowired
+	private UserModelToEntity userModelToEntity;
+
+	@Autowired
+	private UserEntityToModel userEntityToModel;
+
+	private final String PROFILE_PIC_DIR = "storage/profilePics/";
+
+	public UserResponse signup(UserSignupRequestModel userSignupRequestModel, MultipartFile image) throws Exception {
+		// Duplicate email check
+		User byEmail = userRepo.findByEmail(userSignupRequestModel.getEmail());
+		if (byEmail != null) {
+			throw new Exception("An account with this email already exists. Please use another email.");
+		}
+		// Duplicate phone check
+		User byPhoneNumber = userRepo.findByPhoneNumber(userSignupRequestModel.getPhoneNumber());
+		if (byPhoneNumber != null) {
+			throw new Exception("An account with this phone number already exists. Please use another number.");
+		}
+		// Save image if provided
+		String imageUrl = null;
+		if (image != null && !image.isEmpty()) {
+			File dir = new File(PROFILE_PIC_DIR);
+			if (!dir.exists())
+				dir.mkdirs();
+			String fileName = java.util.UUID.randomUUID() + "_" + image.getOriginalFilename();
+			Path filePath = Paths.get(PROFILE_PIC_DIR + fileName);
+			Files.write(filePath, image.getBytes());
+			imageUrl = filePath.toString();
+		}
+		User userEntity = userModelToEntity.getSaveConvert(userSignupRequestModel, imageUrl);
+		User savedUser = userRepo.save(userEntity);
+		return userEntityToModel.getfindbyId(savedUser);
+	}
+
+	public UserResponse login(UserLoginRequestModel userLoginRequestModel) throws Exception {
 		User user = userRepo.findByUsernamePassword(userLoginRequestModel.getUsername(),
 				userLoginRequestModel.getPassword());
 		if (user == null) {
@@ -62,7 +68,8 @@ public class UserService {
 		}
 		return userEntityToModel.getfindbyId(user);
 	}
-    public UserResponse findById(Integer id) throws Exception {
+
+	public UserResponse findById(Integer id) throws Exception {
 		Optional<User> userOptional = userRepo.findById(id);
 		if (userOptional.isEmpty()) {
 			throw new Exception("The user account does not exist.");
@@ -70,7 +77,8 @@ public class UserService {
 		User user = userOptional.get();
 		return userEntityToModel.getfindbyId(user);
 	}
-    public List<UserResponse> findAllUser(Integer page, Integer size) throws Exception {
+
+	public List<UserResponse> findAllUser(Integer page, Integer size) throws Exception {
 		List<User> userList = userRepo.findAllUser(PageRequest.of(page, size));
 		return userEntityToModel.getFindAllConvert(userList);
 	}
@@ -78,6 +86,4 @@ public class UserService {
 	public long countAllUser() throws Exception {
 		return userRepo.count();
 	}
-
-
 }

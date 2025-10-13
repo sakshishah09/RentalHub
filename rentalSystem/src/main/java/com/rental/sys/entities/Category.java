@@ -3,6 +3,7 @@ package com.rental.sys.entities;
 import jakarta.persistence.*;
 import lombok.Data;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Data
@@ -11,79 +12,25 @@ import java.util.List;
 @NamedQuery(name = "Category.findAll", query = "SELECT c FROM Category c")
 public class Category {
 
-<<<<<<< HEAD
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
-=======
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int id;
->>>>>>> 20370f6 (Local changes: removed deleted files and added new files)
+	private Integer id;
 
 	@Column(nullable = false, length = 100)
 	private String name;
 
 	private String imagePath;
 
-	public String getImagePath() {
-		return imagePath;
-	}
-
-	public void setImagePath(String imagePath) {
-		this.imagePath = imagePath;
-	}
-
-	// (One-to-Many)
 	@OneToMany(mappedBy = "category", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
-	private List<Product> products;
+	private List<Product> products = new ArrayList<>();
 
-<<<<<<< HEAD
-    //(One-to-Many)
-    @OneToMany(mappedBy = "category", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
-    private List<Subcategory> subcategories;
-    
-}
-=======
-	// (One-to-Many)
 	@OneToMany(mappedBy = "category", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
-	private List<Subcategory> subcategories;
+	private List<Subcategory> subcategories = new ArrayList<>();
 
 	public Category() {
 	}
 
-	public int getId() {
-		return this.id;
-	}
-
-	public void setId(int id) {
-		this.id = id;
-	}
-
-	public String getName() {
-		return this.name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	public List<Product> getProducts() {
-		return this.products;
-	}
-
-	public void setProducts(List<Product> products) {
-		this.products = products;
-	}
-
-	public List<Subcategory> getSubcategories() {
-		return this.subcategories;
-	}
-
-	public void setSubcategories(List<Subcategory> subcategories) {
-		this.subcategories = subcategories;
-	}
-
+	// Convenience methods
 	public Product addProduct(Product product) {
 		products.add(product);
 		product.setCategory(this);
@@ -108,4 +55,3 @@ public class Category {
 		return subcategory;
 	}
 }
->>>>>>> 20370f6 (Local changes: removed deleted files and added new files)

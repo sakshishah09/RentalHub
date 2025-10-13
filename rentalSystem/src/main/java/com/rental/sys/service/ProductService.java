@@ -6,7 +6,6 @@ import java.util.Map;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -25,12 +24,16 @@ import lombok.extern.slf4j.Slf4j;
 @Service
 @Slf4j
 public class ProductService {
+	
 	@Autowired
 	private ProductRepo productRepo;
+	
 	@Autowired
 	private ProductModelToEntity productModelToEntity;
+	
 	@Autowired
 	private ProductEntityToModel productEntityToModel;
+	
 	@Autowired
 	private ProductRepositoryImpl productCustomRepo;
 

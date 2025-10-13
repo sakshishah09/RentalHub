@@ -1,77 +1,24 @@
 package com.rental.sys.entities;
 
 import jakarta.persistence.*;
+import lombok.Data;
 import java.util.List;
 
+@Data
 @Entity
 @Table(name = "subcategories")
 @NamedQuery(name = "Subcategory.findAll", query = "SELECT s FROM Subcategory s")
 public class Subcategory {
-	@Id
-<<<<<<< HEAD
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private Integer id;
-=======
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int id;
->>>>>>> 20370f6 (Local changes: removed deleted files and added new files)
 
-	private String name;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
 
-	// bi-directional many-to-one association to Product
-	@OneToMany(mappedBy = "subcategory")
-	private List<Product> products;
+    private String name;
 
-	// bi-directional many-to-one association to Category
-	@ManyToOne
-	private Category category;
+    @OneToMany(mappedBy = "subcategory")
+    private List<Product> products;
 
-	public Subcategory() {
-	}
-
-	public int getId() {
-		return this.id;
-	}
-
-	public void setId(int id) {
-		this.id = id;
-	}
-
-	public String getName() {
-		return this.name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	public List<Product> getProducts() {
-		return this.products;
-	}
-
-	public void setProducts(List<Product> products) {
-		this.products = products;
-	}
-
-	public Product addProduct(Product product) {
-		getProducts().add(product);
-		product.setSubcategory(this);
-
-		return product;
-	}
-
-	public Product removeProduct(Product product) {
-		getProducts().remove(product);
-		product.setSubcategory(null);
-
-		return product;
-	}
-
-	public Category getCategory() {
-		return this.category;
-	}
-
-	public void setCategory(Category category) {
-		this.category = category;
-	}
+    @ManyToOne
+    private Category category;
 }

@@ -30,8 +30,10 @@ import io.swagger.v3.oas.annotations.Operation;
 @RestController
 @RequestMapping("/products")
 public class ProductController {
+	
 	@Autowired
 	private ProductService productService;
+	
 	@Autowired
 	private ObjectMapper objectMapper;
 
@@ -194,7 +196,4 @@ public class ProductController {
 //	            return RestResponse.build().withError(e.getMessage());
 //	        }
 //	    }
-	
-
-
 }

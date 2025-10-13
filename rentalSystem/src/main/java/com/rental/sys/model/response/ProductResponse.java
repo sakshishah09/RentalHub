@@ -22,9 +22,6 @@ public class ProductResponse {
 	private int subcategoryId;
 	private int userId;
 	private List<ProductImageResponse> images;
-<<<<<<< HEAD
-}
-=======
 
 	public ProductResponse(Product prod) {
 		this.id = prod.getId();
@@ -46,4 +43,3 @@ public class ProductResponse {
 		}).collect(Collectors.toList());
 	}
 }
->>>>>>> 20370f6 (Local changes: removed deleted files and added new files)

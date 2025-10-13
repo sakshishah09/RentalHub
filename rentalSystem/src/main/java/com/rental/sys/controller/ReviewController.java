@@ -18,7 +18,8 @@ import com.rental.sys.service.ReviewService;
 @RestController
 @RequestMapping("/reviews")
 public class ReviewController {
-    @Autowired
+    
+	@Autowired
     private ReviewService reviewService;
 
     @PostMapping("/add")
