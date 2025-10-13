@@ -30,7 +30,20 @@ public class SubCategoryService {
         Subcategory saved = subCategoryRepo.save(subcategory);
         return subCategoryEntityToModel.convertToResponse(saved);
     }
+    public SubCategoryResponse updateSubCategory(Integer id, String name, Integer categoryId, MultipartFile image) throws Exception {
+        Subcategory subcategory = subCategoryModelToEntity.updateSubCategory(id, name, categoryId, image);
+        Subcategory updated = subCategoryRepo.save(subcategory);
+        return subCategoryEntityToModel.convertToResponse(updated);
+    }
+    public List<SubCategoryResponse> findAllSubCategories(Integer page, Integer size) throws Exception {
+        List<Subcategory> subcategoryList = subCategoryRepo.findAllSubCategories(PageRequest.of(page, size));
+        return subCategoryEntityToModel.convertToList(subcategoryList);
+    }
 
+    // Count all subcategories
+    public long countAllSubCategories() {
+        return subCategoryRepo.count();
+    }
     public List<SubCategoryResponse> getSubCategoriesByCategory(Integer categoryId) {
         List<Subcategory> list = subCategoryRepo.findByCategoryId(categoryId);
         return list.stream()

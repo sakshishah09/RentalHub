@@ -32,6 +32,21 @@ public class SubCategoryController {
             return RestResponse.build().withError(e.getMessage());
         }
     }
+    @Operation(summary = "Update subcategory", description = "Updates an existing subcategory’s name or image.")
+    @PutMapping(value = "/update/{id}", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    public RestResponse updateSubCategory(
+            @PathVariable Integer id,
+            @RequestPart("name") String name,
+            @RequestPart("categoryId") Integer categoryId,
+            @RequestPart(value = "image", required = false) MultipartFile image) {
+        try {
+            SubCategoryResponse updated = subCategoryService.updateSubCategory(id, name, categoryId, image);
+            return RestResponse.build().withSuccess("SubCategory updated successfully", updated);
+        } catch (Exception e) {
+            return RestResponse.build().withError(e.getMessage());
+        }
+    }
+
 
     @Operation(summary = "Get subcategories by category ID", description = "Fetch all subcategories under a specific category.")
     @GetMapping("/category/categoryId")
@@ -39,6 +54,22 @@ public class SubCategoryController {
         try {
             List<SubCategoryResponse> subCategories = subCategoryService.getSubCategoriesByCategory(categoryId);
             return RestResponse.build().withSuccess("SubCategories fetched successfully", subCategories);
+        } catch (Exception e) {
+            return RestResponse.build().withError(e.getMessage());
+        }
+    }
+    @Operation(summary = "Get all subcategories (paginated)", description = "Fetch all subcategories with pagination.")
+    @GetMapping(value = "/all", produces = "application/json")
+    public RestResponse findAll(@RequestParam("page") Integer page, @RequestParam("size") Integer size) {
+        try {
+            List<SubCategoryResponse> subCategoryList = subCategoryService.findAllSubCategories(page, size);
+            long totalRecord = subCategoryService.countAllSubCategories();
+            return RestResponse.build()
+                    .withSuccess("SubCategory list fetched successfully")
+                    .withTotalRecords(totalRecord)
+                    .withPageNumber(page)
+                    .withPageSize(size)
+                    .withData(subCategoryList);
         } catch (Exception e) {
             return RestResponse.build().withError(e.getMessage());
         }
