@@ -7,14 +7,18 @@ import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 @Data
+<<<<<<< HEAD
 @Entity
+=======
+>>>>>>> 20370f6 (Local changes: removed deleted files and added new files)
 @Table(name = "orders")
 public class Order {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Integer id;
 
+<<<<<<< HEAD
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "product_id", nullable = false)
     private Product product;
@@ -42,3 +46,18 @@ public class Order {
 
     // getters & setters
 }
+=======
+	@ManyToOne
+	@JoinColumn(name = "product_id", nullable = false)
+	private Product product;
+
+	@ManyToOne
+	@JoinColumn(name = "user_id", nullable = false)
+	private User user;
+
+	private BigDecimal amount;
+	private String status; // CREATED, PAID, CANCELLED
+	private LocalDateTime createdAt;
+
+}
+>>>>>>> 20370f6 (Local changes: removed deleted files and added new files)

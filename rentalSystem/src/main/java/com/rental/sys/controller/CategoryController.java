@@ -7,10 +7,8 @@ import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.rental.sys.entities.Category;
-import com.rental.sys.model.request.ProductSaveRequestModel;
+import com.rental.sys.model.response.CategoryDetailsResponse;
 import com.rental.sys.model.response.CategoryResponse;
-import com.rental.sys.model.response.ProductResponse;
 import com.rental.sys.response.RestResponse;
 import com.rental.sys.service.CategoryService;
 
@@ -59,6 +57,17 @@ public class CategoryController {
         }
     }
 
+    @GetMapping("/{id}/details")
+    public RestResponse getCategoryDetails(@PathVariable Integer id) {
+        try {
+            // Returns category + sub-categories + products
+            CategoryDetailsResponse response = categoryService.getCategoryDetails(id);
+            return RestResponse.build().withSuccess("Category details fetched", response);
+        } catch (Exception e) {
+            return RestResponse.build().withError(e.getMessage());
+        }
+    }
+    
 //    @Operation(summary = "Update category", description = "Update an existing category by ID.")
 //    @PutMapping(value = "/update/{id}", consumes = "application/json", produces = "application/json")
 //    public RestResponse updateCategory(@PathVariable Integer id,@RequestParam("name") String name) {
@@ -81,4 +90,3 @@ public class CategoryController {
 //        }
 //    }
 }
-

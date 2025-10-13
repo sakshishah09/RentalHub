@@ -4,20 +4,25 @@ import jakarta.persistence.*;
 import java.util.List;
 
 @Entity
-@Table(name="subcategories")
-@NamedQuery(name="Subcategory.findAll", query="SELECT s FROM Subcategory s")
-public class Subcategory  {
+@Table(name = "subcategories")
+@NamedQuery(name = "Subcategory.findAll", query = "SELECT s FROM Subcategory s")
+public class Subcategory {
 	@Id
+<<<<<<< HEAD
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer id;
+=======
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private int id;
+>>>>>>> 20370f6 (Local changes: removed deleted files and added new files)
 
 	private String name;
 
-	//bi-directional many-to-one association to Product
-	@OneToMany(mappedBy="subcategory")
+	// bi-directional many-to-one association to Product
+	@OneToMany(mappedBy = "subcategory")
 	private List<Product> products;
 
-	//bi-directional many-to-one association to Category
+	// bi-directional many-to-one association to Category
 	@ManyToOne
 	private Category category;
 
@@ -69,5 +74,4 @@ public class Subcategory  {
 	public void setCategory(Category category) {
 		this.category = category;
 	}
-
 }

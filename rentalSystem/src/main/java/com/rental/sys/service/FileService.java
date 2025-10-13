@@ -16,9 +16,9 @@ public class FileService {
         String folderPath = STORAGE_PATH + folder;
         File directory = new File(folderPath);
 
-        // ✅ Create folder if it doesn’t exist
+        // Create folder if it doesn’t exist
         if (!directory.exists()) {
-            directory.mkdirs();  // creates parent + subdirectories
+            directory.mkdirs();  // creates parent + sub-directories
         }
 
         // Generate unique file name

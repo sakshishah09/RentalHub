@@ -12,23 +12,25 @@ import jakarta.persistence.Table;
 import jakarta.persistence.UniqueConstraint;
 
 @Entity
-@Table(name="product_blocked_date",
-       uniqueConstraints = @UniqueConstraint(columnNames={"product_id","blocked_date"}))
+@Table(name = "product_blocked_date", uniqueConstraints = @UniqueConstraint(columnNames = { "product_id",
+		"blocked_date" }))
 public class ProductBlockedDate {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Integer id;
 
-    @ManyToOne
-    @JoinColumn(name="product_id", nullable=false)
-    private Product product;
+	@ManyToOne
+	@JoinColumn(name = "product_id", nullable = false)
+	private Product product;
 
-    private LocalDate blockedDate;
+	private LocalDate blockedDate;
 
-    public ProductBlockedDate() {}
-    public ProductBlockedDate(Product product, LocalDate blockedDate) {
-        this.product = product; this.blockedDate = blockedDate;
-    }
+	public ProductBlockedDate() {
+	}
+
+	public ProductBlockedDate(Product product, LocalDate blockedDate) {
+		this.product = product;
+		this.blockedDate = blockedDate;
+	}
 }
-

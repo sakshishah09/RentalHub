@@ -13,29 +13,73 @@ import jakarta.persistence.UniqueConstraint;
 import lombok.Data;
 @Data
 @Entity
-@Table(
-    name = "wishlist",
-    uniqueConstraints = @UniqueConstraint(columnNames = {"user_id", "product_id"})
-)
+@Table(name = "wishlist", uniqueConstraints = @UniqueConstraint(columnNames = { "user_id", "product_id" }))
 public class Wishlist {
+<<<<<<< HEAD
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+=======
+>>>>>>> 20370f6 (Local changes: removed deleted files and added new files)
 
-    @ManyToOne
-    @JoinColumn(name = "user_id", nullable = false)
-    private User user;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private int id;
 
-    @ManyToOne
-    @JoinColumn(name = "product_id", nullable = false)
-    private Product product;
+	@ManyToOne
+	@JoinColumn(name = "user_id", nullable = false)
+	private User user;
 
-    private LocalDateTime createdAt;
+	@ManyToOne
+	@JoinColumn(name = "product_id", nullable = false)
+	private Product product;
 
+<<<<<<< HEAD
     @PrePersist
     protected void onCreate() {
         this.createdAt = LocalDateTime.now();
     }
     // getters and setters...
 }
+=======
+	private LocalDateTime createdAt;
+
+	@PrePersist
+	protected void onCreate() {
+		this.createdAt = LocalDateTime.now();
+	}
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
+
+	public Product getProduct() {
+		return product;
+	}
+
+	public void setProduct(Product product) {
+		this.product = product;
+	}
+
+	public LocalDateTime getCreatedAt() {
+		return createdAt;
+	}
+
+	public void setCreatedAt(LocalDateTime createdAt) {
+		this.createdAt = createdAt;
+	}
+}
+>>>>>>> 20370f6 (Local changes: removed deleted files and added new files)

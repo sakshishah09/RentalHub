@@ -45,6 +45,7 @@ public class User {
     @ManyToOne
     @JoinColumn(name = "role_id")
     private Role role;
+<<<<<<< HEAD
     @PrePersist
     public void setDefaultRole() {
         if (this.role == null) {
@@ -57,3 +58,6 @@ public class User {
         }
     }
 }
+=======
+}
+>>>>>>> 20370f6 (Local changes: removed deleted files and added new files)

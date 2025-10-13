@@ -5,22 +5,64 @@ import lombok.Data;
 
 @Data
 @Entity
-@Table(name="payments")
-@NamedQuery(name="Payment.findAll", query="SELECT p FROM Payment p")
-public class Payment  {
+@Table(name = "payments")
+@NamedQuery(name = "Payment.findAll", query = "SELECT p FROM Payment p")
+public class Payment {
 
 	@Id
+<<<<<<< HEAD
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer id;
+=======
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private int id;
+>>>>>>> 20370f6 (Local changes: removed deleted files and added new files)
 
-	@Column(name="payment_method")
+	@Column(name = "payment_method")
 	private String paymentMethod;
 
-	@Column(name="payment_status")
+	@Column(name = "payment_status")
 	private String paymentStatus;
 
-	//bi-directional many-to-one association to Booking
+	// bi-directional many-to-one association to Booking
 	@ManyToOne
 	private Booking booking;
 
+<<<<<<< HEAD
+=======
+	public Payment() {
+	}
+
+	public int getId() {
+		return this.id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public String getPaymentMethod() {
+		return this.paymentMethod;
+	}
+
+	public void setPaymentMethod(String paymentMethod) {
+		this.paymentMethod = paymentMethod;
+	}
+
+	public String getPaymentStatus() {
+		return this.paymentStatus;
+	}
+
+	public void setPaymentStatus(String paymentStatus) {
+		this.paymentStatus = paymentStatus;
+	}
+
+	public Booking getBooking() {
+		return this.booking;
+	}
+
+	public void setBooking(Booking booking) {
+		this.booking = booking;
+	}
+>>>>>>> 20370f6 (Local changes: removed deleted files and added new files)
 }

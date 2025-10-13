@@ -14,4 +14,7 @@ public interface ProductRepo extends JpaRepository<Product, Integer> {
 
 	@Query("SELECT p FROM Product p")
 	List<Product> findAllProduct(Pageable pageable);
+
+	// Fetch products by sub-category ID
+	List<Product> findBySubcategoryId(Integer subcategoryId);
 }
