@@ -33,7 +33,9 @@ public class User {
     private String password;
 
     private String status;
-
+    @Column(name = "is_seller", nullable = false)
+    private Boolean isSeller = false; // 👈 default value set at Java level
+    
     private String address;
 
     @ManyToOne
@@ -43,4 +45,15 @@ public class User {
     @ManyToOne
     @JoinColumn(name = "role_id")
     private Role role;
+    @PrePersist
+    public void setDefaultRole() {
+        if (this.role == null) {
+            Role defaultRole = new Role();
+            defaultRole.setId(2); // assuming 1 = MEMBER in your Role table
+            this.role = defaultRole;
+        }
+        if (this.isSeller == null) {
+            this.isSeller = false; // safety: ensure default is false
+        }
+    }
 }

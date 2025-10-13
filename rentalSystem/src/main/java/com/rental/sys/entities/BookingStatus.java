@@ -10,9 +10,4 @@ public enum BookingStatus {
 	    RENTED,          // product handed to user
 	    RETURNED,        // product returned successfully
 	    NOT_RETURNED     // return date passed but product not returned
-
-//	PENDING,   // Booking created but payment not done
-//    BOOKED,    // Payment done successfully
-//    RETURNED,  // Item returned after rental
-//    CANCELLED  // Booking cancelled before start
 }

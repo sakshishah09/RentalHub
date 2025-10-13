@@ -52,6 +52,10 @@ public class ProductModelToEntity {
 		if (!optionalUser.isPresent()) {
 			throw new Exception("The User does not exist.");
 		}
+		User user = optionalUser.get();
+		if (!Boolean.TRUE.equals(user.getIsSeller())) {
+            throw new Exception("User is not approved as a seller. Please contact admin for approval.");
+        }
 		// Create product
 		Product product = new Product();
 		product.setName(request.getName());
@@ -63,7 +67,7 @@ public class ProductModelToEntity {
 		product.setAvailable(request.isAvailable());
 		product.setCategory(optionalCategory.get());
 		product.setSubcategory(optionalSubcategory.get());
-		product.setUser(optionalUser.get());
+		product.setUser(user);
 		for (MultipartFile image : images) {
 			if (!image.isEmpty()) {
 				String fileName = UUID.randomUUID() + "_" + image.getOriginalFilename();

@@ -29,13 +29,7 @@ public class UserModelToEntity {
 		user.setPassword(signupRequestModel.getPassword());
 		user.setStatus(signupRequestModel.getStatus());
 		user.setAddress(signupRequestModel.getAddress());
-		user.setLocation(optionalLocation.get());
-		// Set role if provided
-		if (signupRequestModel.getRoleId() > 0) {
-			Role role = roleRepo.findById(signupRequestModel.getRoleId())
-					.orElseThrow(() -> new Exception("Role does not exist."));
-			user.setRole(role);
-		}
+		user.setLocation(optionalLocation.get());		
 		// Set image if provided
 		if (imageUrl != null) {
 			user.setImageUrl(imageUrl);

@@ -4,7 +4,6 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
-import java.util.Arrays;
 import java.util.List;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -19,21 +18,15 @@ import com.rental.sys.convertor.model.BookingEntityToModel;
 import com.rental.sys.entities.Booking;
 import com.rental.sys.entities.BookingStatus;
 import com.rental.sys.entities.Product;
-import com.rental.sys.entities.ProductBlockedDate;
-import com.rental.sys.entities.Order;
 import com.rental.sys.entities.User;
 import com.rental.sys.model.request.BookingSaveRequestModel;
-import com.rental.sys.model.request.OrderSaveRequestModel;
 import com.rental.sys.model.response.BookingResponse;
 import com.rental.sys.repo.BookingRepo;
-import com.rental.sys.repo.OrderRepository;
-import com.rental.sys.repo.ProductBlockedDateRepo;
 import com.rental.sys.repo.ProductRepo;
 import com.rental.sys.repo.UserRepo;
 import com.rental.sys.response.PageResponse;
 
 import jakarta.transaction.Transactional;
-import java.util.stream.Collectors;
 @Service
 public class BookingService {
 	@Autowired
@@ -42,10 +35,6 @@ public class BookingService {
 	private ProductRepo productRepo;
 	@Autowired
 	private UserRepo userRepo;
-	@Autowired
-	private ProductBlockedDateRepo blockedDateRepo;
-	@Autowired
-	private OrderRepository orderRepo;
 
 	@Autowired
 	private BookingEntityToModel bookingEntityToModel;

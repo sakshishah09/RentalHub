@@ -11,6 +11,4 @@ public class UserSignupRequestModel {
 	private String status;
 	private String address;
 	private Integer locationId;
-	private Integer roleId;
-	
 }
