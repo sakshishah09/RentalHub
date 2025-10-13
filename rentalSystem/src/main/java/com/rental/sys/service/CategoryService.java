@@ -75,32 +75,41 @@ public class CategoryService {
 	}
 
 	public CategoryDetailsResponse getCategoryDetails(Integer categoryId) {
-		Category category = categoryRepository.findById(categoryId)
-				.orElseThrow(() -> new RuntimeException("Category not found"));
+	    Category category = categoryRepository.findById(categoryId)
+	            .orElseThrow(() -> new RuntimeException("Category not found"));
 
-		List<Subcategory> subcategories = subCategoryRepo.findByCategoryId(categoryId);
+	    List<Subcategory> subcategories = subCategoryRepo.findByCategoryId(categoryId);
 
-		List<SubCategoryResponse> subcategoryResponses = subcategories.stream().map(sub -> {
-			// Use the ProductResponse constructor that accepts Product entity
-			List<ProductResponse> products = productRepository.findBySubcategoryId(sub.getId()).stream()
-					.map(ProductResponse::new)
-					.collect(Collectors.toList());
+	    List<SubCategoryResponse> subcategoryResponses = subcategories.stream().map(sub -> {
+	        // Map products
+	        List<ProductResponse> products = productRepository.findBySubcategoryId(sub.getId()).stream()
+	                .map(ProductResponse::new)
+	                .collect(Collectors.toList());
 
-			SubCategoryResponse subResp = new SubCategoryResponse();
-			subResp.setId(sub.getId());
-			subResp.setName(sub.getName());
-			subResp.setCategoryId(category.getId());
-			subResp.setCategoryName(category.getName());
-			subResp.setProducts(products);
-			return subResp;
-		}).collect(Collectors.toList());
+	        SubCategoryResponse subResp = new SubCategoryResponse();
+	        subResp.setId(sub.getId());
+	        subResp.setName(sub.getName());
+	        subResp.setCategoryId(category.getId());
+	        subResp.setCategoryName(category.getName());
+	        subResp.setProducts(products);
 
-		CategoryDetailsResponse response = new CategoryDetailsResponse();
-		response.setId(category.getId());
-		response.setName(category.getName());
-		response.setImagePath(category.getImagePath());
-		response.setSubcategories(subcategoryResponses);
+	        // ✅ Set the imagePath for subcategory
+	        String imgPath = sub.getImagePath();
+	        if (imgPath != null && !imgPath.isEmpty()) {
+	            subResp.setImagePath(imgPath.replace("\\", "/")); // Convert backslashes to forward slashes
+	        } else {
+	            subResp.setImagePath(null); // Or leave null to use default image in Angular
+	        }
 
-		return response;
+	        return subResp;
+	    }).collect(Collectors.toList());
+
+	    CategoryDetailsResponse response = new CategoryDetailsResponse();
+	    response.setId(category.getId());
+	    response.setName(category.getName());
+	    response.setImagePath(category.getImagePath() != null ? category.getImagePath().replace("\\", "/") : null);
+	    response.setSubcategories(subcategoryResponses);
+
+	    return response;
 	}
 }

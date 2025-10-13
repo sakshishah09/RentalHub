@@ -1,7 +1,6 @@
 package com.rental.sys.model.response;
 
 import java.util.List;
-
 import lombok.Data;
 
 @Data
