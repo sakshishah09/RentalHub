@@ -42,9 +42,7 @@ public class OrderService {
 		User seller = product.getUser();
 		if (seller == null)
 			throw new Exception("Product seller not found");
-
 		BigDecimal total = product.getPricePerDay().multiply(BigDecimal.valueOf(request.getQuantity()));
-
 		Order order = new Order();
 		order.setProduct(product);
 		order.setBuyer(buyer);
@@ -52,7 +50,6 @@ public class OrderService {
 		order.setQuantity(request.getQuantity());
 		order.setTotalPrice(total);
 		order.setStatus(OrderStatus.PLACED);
-
 		order = orderRepo.save(order);
 		return orderEntityToModel.convert(order);
 	}
@@ -64,7 +61,6 @@ public class OrderService {
 		if (!order.getSeller().getId().equals(sellerId)) {
 			throw new Exception("You are not authorized to cancel this order");
 		}
-
 		order.setStatus(OrderStatus.CANCELLED);
 		order = orderRepo.save(order);
 		return orderEntityToModel.convert(order);

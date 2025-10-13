@@ -2,10 +2,10 @@ package com.rental.sys.controller;
 
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
-import com.rental.sys.model.request.SubCategorySaveRequestModel;
-import com.rental.sys.model.request.SubCategoryUpdateRequestModel;
 import com.rental.sys.model.response.SubCategoryResponse;
 import com.rental.sys.response.RestResponse;
 import com.rental.sys.service.SubCategoryService;
@@ -20,26 +20,21 @@ public class SubCategoryController {
     private SubCategoryService subCategoryService;
 
     @Operation(summary = "Create a new subcategory", description = "Adds a new subcategory under a category.")
-    @PostMapping(consumes = "application/json", produces = "application/json")
-    public RestResponse createSubCategory(@RequestBody SubCategorySaveRequestModel request) {
+    @PostMapping(consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    public RestResponse createSubCategory(
+            @RequestPart("name") String name,
+            @RequestPart("categoryId") Integer categoryId,
+            @RequestPart(value = "image", required = false) MultipartFile image) {
         try {
-            SubCategoryResponse saved = subCategoryService.createSubCategory(request);
+            SubCategoryResponse saved = subCategoryService.createSubCategory(name, categoryId, image);
             return RestResponse.build().withSuccess("SubCategory created successfully", saved);
         } catch (Exception e) {
             return RestResponse.build().withError(e.getMessage());
         }
     }
 
-    @Operation(summary = "Get subcategory by ID", description = "Fetch a subcategory by its ID.")
-    @GetMapping("/{id}")
-    public RestResponse getSubCategoryById(@PathVariable Integer id) {
-        return subCategoryService.getSubCategoryById(id)
-                .map(subCategory -> RestResponse.build().withSuccess("SubCategory fetched successfully", subCategory))
-                .orElse(RestResponse.build().withError("SubCategory not found"));
-    }
-
     @Operation(summary = "Get subcategories by category ID", description = "Fetch all subcategories under a specific category.")
-    @GetMapping("/category/{categoryId}")
+    @GetMapping("/category/categoryId")
     public RestResponse getSubCategoriesByCategoryId(@PathVariable Integer categoryId) {
         try {
             List<SubCategoryResponse> subCategories = subCategoryService.getSubCategoriesByCategory(categoryId);
@@ -49,19 +44,8 @@ public class SubCategoryController {
         }
     }
 
-    @Operation(summary = "Update subcategory", description = "Update an existing subcategory by ID.")
-    @PutMapping(consumes = "application/json", produces = "application/json")
-    public RestResponse updateSubCategory(@RequestBody SubCategoryUpdateRequestModel request) {
-        try {
-            SubCategoryResponse updated = subCategoryService.updateSubCategory(request);
-            return RestResponse.build().withSuccess("SubCategory updated successfully", updated);
-        } catch (Exception e) {
-            return RestResponse.build().withError(e.getMessage());
-        }
-    }
-
     @Operation(summary = "Delete subcategory", description = "Delete an existing subcategory by ID.")
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/id")
     public RestResponse deleteSubCategory(@PathVariable Integer id) {
         try {
             subCategoryService.deleteSubCategory(id);

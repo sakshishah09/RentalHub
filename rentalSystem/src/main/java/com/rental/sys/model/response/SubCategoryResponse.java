@@ -11,5 +11,5 @@ public class SubCategoryResponse {
 	private int categoryId;
 	private String categoryName;
 	private List<ProductResponse> products;
-	// getters & setters
+	private String imagePath;
 }

@@ -16,8 +16,12 @@ public class Subcategory {
 
     private String name;
 
+    @Column(name = "image_path")
+    private String imagePath;
+
     @OneToMany(mappedBy = "subcategory")
     private List<Product> products;
+    
 
     @ManyToOne
     private Category category;
