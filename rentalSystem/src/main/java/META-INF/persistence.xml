@@ -5,7 +5,7 @@
 		<class>com.rental.sys.entities.Category</class>
 		<class>com.rental.sys.entities.City</class>
 		<class>com.rental.sys.entities.Location</class>
-		<class>com.rental.sys.entities.Order</class>
+		<class>com.rental.sys.entities.Orders</class>
 		<class>com.rental.sys.entities.Payment</class>
 		<class>com.rental.sys.entities.ProductBlockedDate</class>
 		<class>com.rental.sys.entities.ProductImage</class>

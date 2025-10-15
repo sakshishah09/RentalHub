@@ -5,7 +5,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import com.rental.sys.convertor.model.OrderEntityToModel;
-import com.rental.sys.entities.Order;
+import com.rental.sys.entities.Orders;
 import com.rental.sys.entities.OrderStatus;
 import com.rental.sys.entities.Product;
 import com.rental.sys.entities.User;
@@ -43,7 +43,7 @@ public class OrderService {
 		if (seller == null)
 			throw new Exception("Product seller not found");
 		BigDecimal total = product.getPricePerDay().multiply(BigDecimal.valueOf(request.getQuantity()));
-		Order order = new Order();
+		Orders order = new Orders();
 		order.setProduct(product);
 		order.setBuyer(buyer);
 		order.setSeller(seller);
@@ -56,7 +56,7 @@ public class OrderService {
 
 	// Cancel order
 	public OrderResponse cancelOrder(Integer orderId, Integer sellerId) throws Exception {
-		Order order = orderRepo.findById(orderId).orElseThrow(() -> new Exception("Order not found"));
+		Orders order = orderRepo.findById(orderId).orElseThrow(() -> new Exception("Order not found"));
 
 		if (!order.getSeller().getId().equals(sellerId)) {
 			throw new Exception("You are not authorized to cancel this order");
@@ -67,7 +67,7 @@ public class OrderService {
 	}
 
 	public List<OrderResponse> getOrdersByBuyer(Integer buyerId, Integer page, Integer size) throws Exception {
-		List<Order> orderList = orderRepo.findByBuyerId(buyerId, PageRequest.of(page, size));
+		List<Orders> orderList = orderRepo.findByBuyerId(buyerId, PageRequest.of(page, size));
 		return orderEntityToModel.getFindAllConvert(orderList);
 	}
 
@@ -76,7 +76,7 @@ public class OrderService {
 	}
 
 	public List<OrderResponse> getOrdersBySeller(Integer sellerId, Integer page, Integer size) throws Exception {
-		List<Order> orderList = orderRepo.findBySellerId(sellerId, PageRequest.of(page, size));
+		List<Orders> orderList = orderRepo.findBySellerId(sellerId, PageRequest.of(page, size));
 		return orderEntityToModel.getFindAllConvert(orderList);
 	}
 

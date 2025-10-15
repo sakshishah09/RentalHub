@@ -1,21 +1,21 @@
 package com.rental.sys.convertor.model;
 
-import org.springframework.stereotype.Component;
-
-import com.rental.sys.entities.Order;
-import com.rental.sys.model.response.OrderResponse;
-
 import java.util.List;
 import java.util.stream.Collectors;
+
+import org.springframework.stereotype.Component;
+
+import com.rental.sys.entities.Orders;
+import com.rental.sys.model.response.OrderResponse;
 
 @Component
 public class OrderEntityToModel {
 
-    public List<OrderResponse> getFindAllConvert(List<Order> orders) {
+    public List<OrderResponse> getFindAllConvert(List<Orders> orders) {
         return orders.stream().map(this::convert).collect(Collectors.toList());
     }
 
-    public OrderResponse convert(Order order) {
+    public OrderResponse convert(Orders order) {
         OrderResponse response = new OrderResponse();
         response.setId(order.getId());
         response.setProductName(order.getProduct().getName());

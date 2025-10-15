@@ -5,7 +5,7 @@ spring:
     type: com.zaxxer.hikari.HikariDataSource
     url: jdbc:mysql://localhost:3306/rental_sys
     username: root
-    password: neha07
+    password: root
     driver-class-name: com.mysql.cj.jdbc.Driver
     hikari: 
       minimumIdle: 5
