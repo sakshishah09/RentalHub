@@ -101,6 +101,26 @@ public class ProductController {
 			return RestResponse.build().withError(e.getMessage());
 		}
 	}
+	@RequestMapping(method = RequestMethod.GET, value = "/sellable", produces = "application/json")
+	public RestResponse findSellableProducts() {
+	    try {
+	        List<ProductResponse> products = productService.findSellableProducts();
+	        return RestResponse.build().withSuccess("Sellable products found successfully", products);
+	    } catch (Exception e) {
+	        return RestResponse.build().withError(e.getMessage());
+	    }
+	}
+
+	@RequestMapping(method = RequestMethod.GET, value = "/rentable", produces = "application/json")
+	public RestResponse findRentableProducts() {
+	    try {
+	        List<ProductResponse> products = productService.findRentableProducts();
+	        return RestResponse.build().withSuccess("Rentable products found successfully", products);
+	    } catch (Exception e) {
+	        return RestResponse.build().withError(e.getMessage());
+	    }
+	}
+
 
 	@RequestMapping(method = RequestMethod.GET, value = "/filterBy", produces = MediaType.APPLICATION_JSON_VALUE)
 	public RestResponse filterBy(

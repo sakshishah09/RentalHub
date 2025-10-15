@@ -42,12 +42,10 @@ public class ProductModelToEntity {
 		if (!optionalCategory.isPresent()) {
 			throw new Exception("The category does not exist.");
 		}
-
 		Optional<Subcategory> optionalSubcategory = subcategoryRepo.findById(request.getSubcategoryId());
 		if (!optionalSubcategory.isPresent()) {
 			throw new Exception("The Subcategory does not exist.");
 		}
-
 		Optional<User> optionalUser = userRepo.findById(request.getUserId());
 		if (!optionalUser.isPresent()) {
 			throw new Exception("The User does not exist.");
@@ -64,7 +62,7 @@ public class ProductModelToEntity {
 		product.setColor(request.getColor());
 		product.setPricePerDay(request.getPricePerDay());
 		product.setPriceForSale(request.getPriceForSale());
-		product.setAvailable(request.isAvailable());
+		product.setProductType(request.getProductType());
 		product.setCategory(optionalCategory.get());
 		product.setSubcategory(optionalSubcategory.get());
 		product.setUser(user);
@@ -99,6 +97,8 @@ public class ProductModelToEntity {
 		product.setPricePerDay(request.getPricePerDay());
 		product.setPriceForSale(request.getPriceForSale());
 		product.setAvailable(request.isAvailable());
+		product.setProductType(request.getProductType());
+
 
         // Update existing images selectively
 		if (imagesToUpdate != null) {

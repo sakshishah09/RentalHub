@@ -6,6 +6,8 @@ import java.util.Map;
 
 import org.springframework.web.multipart.MultipartFile;
 
+import com.rental.sys.entities.ProductType;
+
 import lombok.Data;
 @Data
 public class ProductUpdateRequestModel {
@@ -26,7 +28,7 @@ public class ProductUpdateRequestModel {
 	    private Integer categoryId;
 	    private Integer subcategoryId;
 	    private Integer userId;
-
+	    private ProductType productType;
 	    // getters and setters
 
 }

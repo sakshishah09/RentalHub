@@ -30,11 +30,11 @@ public class Product {
     @Column(name = "price_for_sale")
     private BigDecimal priceForSale;
 
-    private boolean available;
-
-    @Column(name = "is_sold")
-    private Boolean isSold = false;
-
+    private boolean available = true;
+   
+    @Enumerated(EnumType.STRING)
+    private ProductType productType;
+    
     @CreationTimestamp
     @Column(name = "created_at", updatable = false)
     private Timestamp createdAt;

@@ -86,4 +86,14 @@ public class ProductService {
 		log.info("Count Query Result: {}", count);
 		return count;
 	}
+	public List<ProductResponse> findSellableProducts() {
+	    List<Product> products = productRepo.findSellableProducts();
+	    return productEntityToModel.getFindAllConvert(products);
+	}
+
+	public List<ProductResponse> findRentableProducts() {
+	    List<Product> products = productRepo.findRentableProducts();
+	    return productEntityToModel.getFindAllConvert(products);
+	}
+
 }
