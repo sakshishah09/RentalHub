@@ -33,10 +33,13 @@ public class UserController {
 
     @Autowired
     private UserService userService;
+    
     @Autowired
 	private ObjectMapper objectMapper;
+    
     @Autowired
     private UserRepo userRepo;
+    
     @Autowired
     private RoleRepo roleRepo;
 

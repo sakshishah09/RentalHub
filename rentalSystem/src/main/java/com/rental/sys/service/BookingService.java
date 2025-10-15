@@ -50,9 +50,6 @@ public class BookingService {
 		Product product = productRepo.findById(req.getProductId())
 				.orElseThrow(() -> new RuntimeException("Product not found"));
 
-		if (product.getIsSold() != null && product.getIsSold())
-			throw new RuntimeException("Product already sold");
-
 		LocalDate from = req.getFromDate();
 		LocalDate to = req.getToDate();
 		if (to.isBefore(from))
